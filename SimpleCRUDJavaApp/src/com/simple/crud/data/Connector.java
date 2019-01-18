@@ -27,8 +27,8 @@ public class Connector {
     static String url="jdbc:mysql://localhost:3306/user_info";
     static String username="root" ;
     static String password ="";
-    public static void main(String[] args) {
-        // TODO code application logic here
-    }
     
+    public static void insertData(String personName) {
+        
+    }
 }
