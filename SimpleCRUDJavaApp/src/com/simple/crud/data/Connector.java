@@ -5,15 +5,28 @@
  */
 package com.simple.crud.data;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
 /**
  *
  * @author kaviranga
  */
 public class Connector {
+    
+    public Connector(){
+        
+    }
 
     /**
      * @param args the command line arguments
      */
+    
+    static String url="jdbc:mysql://localhost:3306/user_info";
+    static String username="root" ;
+    static String password ="";
     public static void main(String[] args) {
         // TODO code application logic here
     }
