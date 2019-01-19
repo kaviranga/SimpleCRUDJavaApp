@@ -36,10 +36,10 @@ public class Connector {
         stmt.executeUpdate(sql);
     }
     
-    public static ArrayList viewData1(String firstName) throws ClassNotFoundException,IOException,SQLException,Exception{
+    public static ArrayList viewData1(String firstName) throws ClassNotFoundException{
         ArrayList al1=new ArrayList();
            try{
-            String sql="SELECT lastName FROM workers WHERE firstName='"+firstName+"'";
+            String sql="SELECT firstName, lastName FROM workers WHERE firstName='"+firstName+"'";
             Class.forName("com.mysql.jdbc.Driver");
             Connection con = DriverManager.getConnection(url,username,password);
             Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_UPDATABLE);
@@ -54,11 +54,11 @@ public class Connector {
         return al1;
     }
     
-    public static ArrayList viewData2(String firstName) throws ClassNotFoundException,IOException,SQLException,Exception{
+    public static ArrayList viewData2(String firstName) throws ClassNotFoundException{
         ArrayList al2=new ArrayList();
            try
            {
-            String sql="SELECT emailAddress FROM workers WHERE firstName='"+firstName+"'";
+            String sql="SELECT firstName, emailAddress FROM workers WHERE firstName='"+firstName+"'";
             Class.forName("com.mysql.jdbc.Driver");
             Connection con = DriverManager.getConnection(url,username,password);
             Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_UPDATABLE);
