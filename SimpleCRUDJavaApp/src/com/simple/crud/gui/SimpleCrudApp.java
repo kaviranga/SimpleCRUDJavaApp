@@ -6,13 +6,18 @@
 package com.simple.crud.gui;
 
 import com.simple.crud.data.Connector;
+import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  *
  * @author kaviranga
  */
 public class SimpleCrudApp extends javax.swing.JFrame {
+
+    private static final long serialVersionUID = 1L;
 
     /**
      * Creates new form SimpleCrudApp
@@ -47,7 +52,7 @@ public class SimpleCrudApp extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBounds(new java.awt.Rectangle(300, 300, 0, 0));
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 153, 153));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("SIMPLE CRUD APP");
@@ -68,6 +73,11 @@ public class SimpleCrudApp extends javax.swing.JFrame {
         editButton.setText("EDIT");
 
         viewButton.setText("VIEW");
+        viewButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewButtonActionPerformed(evt);
+            }
+        });
 
         deleteButton.setText("DELETE");
 
@@ -91,7 +101,7 @@ public class SimpleCrudApp extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 362, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(32, 32, 32)
+                .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(addButton, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -110,11 +120,11 @@ public class SimpleCrudApp extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(lastNameTextField)
                             .addComponent(firstNameTextField)
-                            .addComponent(emailAddressTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE))
+                            .addComponent(emailAddressTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(exitButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(clearButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(clearButton, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -122,7 +132,7 @@ public class SimpleCrudApp extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(clearButton)
@@ -142,7 +152,7 @@ public class SimpleCrudApp extends javax.swing.JFrame {
                     .addComponent(editButton)
                     .addComponent(viewButton)
                     .addComponent(deleteButton))
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
 
         pack();
@@ -159,14 +169,14 @@ public class SimpleCrudApp extends javax.swing.JFrame {
     }//GEN-LAST:event_exitButtonActionPerformed
 
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
-        Connector c = new Connector();
+        Connector c1 = new Connector();
         
         String firstName = firstNameTextField.getText().toString();
         String lastName = lastNameTextField.getText().toString();
         String emailAddress = emailAddressTextField.getText().toString();
         
         try {
-            c.insertData(firstName,lastName,emailAddress);
+            c1.insertData(firstName,lastName,emailAddress);
         } catch (ClassNotFoundException ex) {
             ex.printStackTrace();
         } catch (SQLException ex) {
@@ -175,6 +185,51 @@ public class SimpleCrudApp extends javax.swing.JFrame {
             ex.printStackTrace();
         }
     }//GEN-LAST:event_addButtonActionPerformed
+
+    private void viewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewButtonActionPerformed
+        Connector c2 = new Connector();
+        
+        try{
+            
+            ArrayList al1 = c2.viewData1(firstNameTextField.getText());
+            Iterator it1 = al1.iterator();
+            
+            while(it1.hasNext()){
+                String lastName = it1.next().toString();
+                lastNameTextField.setText(lastName);
+            }
+ 
+        }catch (SQLException ex){
+            ex.printStackTrace();
+        }catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
+        }catch (IOException ex){
+            ex.printStackTrace();
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
+        
+        Connector c3 = new Connector();
+        try{
+            
+            ArrayList al2 = c3.viewData2(firstNameTextField.getText());
+            Iterator it2 = al2.iterator();
+            
+            while(it2.hasNext()){
+                String emailAddress = it2.next().toString();
+                emailAddressTextField.setText(emailAddress);
+            }
+ 
+        }catch (SQLException ex){
+            ex.printStackTrace();
+        }catch (ClassNotFoundException ex){
+            ex.printStackTrace();
+        }catch (IOException ex){
+            ex.printStackTrace();
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
+    }//GEN-LAST:event_viewButtonActionPerformed
 
     /**
      * @param args the command line arguments
