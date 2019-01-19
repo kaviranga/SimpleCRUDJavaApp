@@ -24,11 +24,15 @@ public class Connector {
      * @param args the command line arguments
      */
     
-    static String url="jdbc:mysql://localhost:3306/user_info";
+    static String url="jdbc:mysql://localhost:3306/simpleDB";
     static String username="root" ;
     static String password ="";
     
-    public static void insertData(String personName) {
-        
+    public static void insertData(String firstName,String lastName,String emailAddress) throws SQLException, ClassNotFoundException {
+        String sql = "INSERT INTO workers VALUES('"+firstName+"','"+lastName+"','"+emailAddress+"')";
+        Class.forName("com.mysql.jdbc.Driver");
+        Connection con = DriverManager.getConnection(url,username,password);
+        Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_UPDATABLE);
+        stmt.executeUpdate(sql);
     }
 }

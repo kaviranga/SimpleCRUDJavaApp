@@ -5,6 +5,9 @@
  */
 package com.simple.crud.gui;
 
+import com.simple.crud.data.Connector;
+import java.sql.SQLException;
+
 /**
  *
  * @author kaviranga
@@ -39,7 +42,7 @@ public class SimpleCrudApp extends javax.swing.JFrame {
         exitButton = new javax.swing.JButton();
         firstNameTextField = new javax.swing.JTextField();
         lastNameTextField = new javax.swing.JTextField();
-        emailTextField = new javax.swing.JTextField();
+        emailAddressTextField = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBounds(new java.awt.Rectangle(300, 300, 0, 0));
@@ -56,6 +59,11 @@ public class SimpleCrudApp extends javax.swing.JFrame {
         jLabel4.setText("Email");
 
         addButton.setText("ADD");
+        addButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addButtonActionPerformed(evt);
+            }
+        });
 
         editButton.setText("EDIT");
 
@@ -102,7 +110,7 @@ public class SimpleCrudApp extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(lastNameTextField)
                             .addComponent(firstNameTextField)
-                            .addComponent(emailTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE))
+                            .addComponent(emailAddressTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(exitButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -127,7 +135,7 @@ public class SimpleCrudApp extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
-                    .addComponent(emailTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(emailAddressTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addButton)
@@ -143,12 +151,30 @@ public class SimpleCrudApp extends javax.swing.JFrame {
     private void clearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearButtonActionPerformed
         firstNameTextField.setText("");
         lastNameTextField.setText("");
-        emailTextField.setText("");
+        emailAddressTextField.setText("");
     }//GEN-LAST:event_clearButtonActionPerformed
 
     private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
         System.exit(0);
     }//GEN-LAST:event_exitButtonActionPerformed
+
+    private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
+        Connector c = new Connector();
+        
+        String firstName = firstNameTextField.getText().toString();
+        String lastName = lastNameTextField.getText().toString();
+        String emailAddress = emailAddressTextField.getText().toString();
+        
+        try {
+            c.insertData(firstName,lastName,emailAddress);
+        } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }//GEN-LAST:event_addButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -190,7 +216,7 @@ public class SimpleCrudApp extends javax.swing.JFrame {
     private javax.swing.JButton clearButton;
     private javax.swing.JButton deleteButton;
     private javax.swing.JButton editButton;
-    private javax.swing.JTextField emailTextField;
+    private javax.swing.JTextField emailAddressTextField;
     private javax.swing.JButton exitButton;
     private javax.swing.JTextField firstNameTextField;
     private javax.swing.JLabel jLabel1;
