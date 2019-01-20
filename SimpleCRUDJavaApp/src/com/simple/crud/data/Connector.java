@@ -6,6 +6,7 @@
 package com.simple.crud.data;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.sql.*;
 import java.sql.Connection;
@@ -39,7 +40,8 @@ public class Connector {
     public static ArrayList viewData1(String firstName) throws ClassNotFoundException{
         ArrayList al1=new ArrayList();
            try{
-            String sql="SELECT firstName, lastName FROM workers WHERE firstName='"+firstName+"'";
+            //String sql="SELECT firstName, lastName FROM workers WHERE firstName='"+firstName+"'";
+            String sql="SELECT firstName,lastName FROM workers WHERE firstName='"+firstName+"'";
             Class.forName("com.mysql.jdbc.Driver");
             Connection con = DriverManager.getConnection(url,username,password);
             Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_UPDATABLE);
@@ -58,7 +60,8 @@ public class Connector {
         ArrayList al2=new ArrayList();
            try
            {
-            String sql="SELECT firstName, emailAddress FROM workers WHERE firstName='"+firstName+"'";
+            //String sql="SELECT firstName, emailAddress FROM workers WHERE firstName='"+firstName+"'";
+            String sql="SELECT firstname,emailAddress FROM workers WHERE firstName='"+firstName+"'";
             Class.forName("com.mysql.jdbc.Driver");
             Connection con = DriverManager.getConnection(url,username,password);
             Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_UPDATABLE);
@@ -71,5 +74,22 @@ public class Connector {
               e.printStackTrace();
             }
         return al2;
+    }
+    
+    public static void editData(String firstName,String lastName,String emailAddress) throws ClassNotFoundException,SQLException,Exception
+    {
+        String sql = "UPDATE workers SET lastName ='"+lastName+"',emailAddress = '"+emailAddress+"' WHERE firstName='"+firstName+"'";
+        Class.forName("com.mysql.jdbc.Driver");
+        Connection con = DriverManager.getConnection(url,username,password);
+        Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_UPDATABLE);
+        stmt.executeUpdate(sql);
+    }
+    
+    public static void deleteData(String firstName) throws ClassNotFoundException,SQLException,Exception{
+        String sql ="DELETE FROM workers WHERE firstName ='"+firstName+"'";
+        Class.forName("com.mysql.jdbc.Driver");
+        Connection con = DriverManager.getConnection(url,username,password);
+        Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_UPDATABLE);
+        stmt.executeUpdate(sql);
     }
 }

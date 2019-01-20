@@ -71,6 +71,11 @@ public class SimpleCrudApp extends javax.swing.JFrame {
         });
 
         editButton.setText("EDIT");
+        editButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editButtonActionPerformed(evt);
+            }
+        });
 
         viewButton.setText("VIEW");
         viewButton.addActionListener(new java.awt.event.ActionListener() {
@@ -80,6 +85,11 @@ public class SimpleCrudApp extends javax.swing.JFrame {
         });
 
         deleteButton.setText("DELETE");
+        deleteButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteButtonActionPerformed(evt);
+            }
+        });
 
         clearButton.setText("CLEAR");
         clearButton.addActionListener(new java.awt.event.ActionListener() {
@@ -199,11 +209,7 @@ public class SimpleCrudApp extends javax.swing.JFrame {
                 lastNameTextField.setText(lastName);
             }
  
-        }catch (SQLException ex){
-            ex.printStackTrace();
         }catch (ClassNotFoundException ex) {
-            ex.printStackTrace();
-        }catch (IOException ex){
             ex.printStackTrace();
         }catch (Exception ex){
             ex.printStackTrace();
@@ -220,16 +226,45 @@ public class SimpleCrudApp extends javax.swing.JFrame {
                 emailAddressTextField.setText(emailAddress);
             }
  
-        }catch (SQLException ex){
-            ex.printStackTrace();
         }catch (ClassNotFoundException ex){
-            ex.printStackTrace();
-        }catch (IOException ex){
             ex.printStackTrace();
         }catch (Exception ex){
             ex.printStackTrace();
         }
     }//GEN-LAST:event_viewButtonActionPerformed
+
+    private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
+        Connector d = new Connector();
+        
+        String firstName = firstNameTextField.getText();
+        try {
+            
+            d.deleteData(firstName);
+        } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }//GEN-LAST:event_deleteButtonActionPerformed
+
+    private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
+        Connector u = new Connector();
+        String firstName = firstNameTextField.getText().toString();
+        String lastName = lastNameTextField.getText().toString();
+        String emailAddress = emailAddressTextField.getText().toString();
+    
+        try {
+            u.editData(firstName,lastName,emailAddress);
+        } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }//GEN-LAST:event_editButtonActionPerformed
 
     /**
      * @param args the command line arguments
