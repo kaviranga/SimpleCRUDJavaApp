@@ -17,8 +17,11 @@ import java.sql.DriverManager;
  */
 public class Connector {
     
-    public Connector(){
-        
+    public Connector(String firstname,String lastname, String emailaddress){
+        super();
+        this.firstName = firstname;
+        this.lastName = lastname;
+        this.emailAddress = emailaddress;
     }
 
     /**
@@ -41,15 +44,14 @@ public class Connector {
     public static ArrayList viewData1(String firstName) throws ClassNotFoundException{
         ArrayList al1=new ArrayList();
            try{
-            //String sql="SELECT firstName, lastName FROM workers WHERE firstName='"+firstName+"'";
-            String sql="SELECT firstName,lastName FROM workers WHERE firstName='"+firstName+"'";
+            String sql="SELECT lastName FROM workers WHERE firstName='"+firstName+"'";
             Class.forName(jdbc_driver);
             Connection con = DriverManager.getConnection(url,username,password);
             Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_UPDATABLE);
             ResultSet rs = stmt.executeQuery(sql);
             
                 while(rs.next()){
-                    al1.add(rs.getString("firstName"));
+                    al1.add(rs.getString("lastName"));
                 }
             }catch(SQLException e){
               e.printStackTrace();
@@ -60,15 +62,14 @@ public class Connector {
     public static ArrayList viewData2(String firstName) throws ClassNotFoundException{
         ArrayList al2=new ArrayList();
            try{
-                //String sql="SELECT firstName, emailAddress FROM workers WHERE firstName='"+firstName+"'";
-                String sql="SELECT firstname,emailAddress FROM workers WHERE firstName='"+firstName+"'";
+                String sql="SELECT emailAddress FROM workers WHERE firstName='"+firstName+"'";
                 Class.forName(jdbc_driver);
                 Connection con = DriverManager.getConnection(url,username,password);
                 Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_UPDATABLE);
                 ResultSet rs = stmt.executeQuery(sql);
             
                     while(rs.next()){ 
-                        al2.add(rs.getString("firstName"));
+                        al2.add(rs.getString("emailAddress"));
                     }
             }catch(SQLException e){
               e.printStackTrace();
