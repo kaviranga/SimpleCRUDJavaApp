@@ -13,7 +13,7 @@ import java.util.Iterator;
 
 /**
  *
- * @author kaviranga
+ * @author Duminda Gunawardhana
  */
 public class SimpleCrudApp extends javax.swing.JFrame {
 
@@ -54,7 +54,8 @@ public class SimpleCrudApp extends javax.swing.JFrame {
         lastButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setBounds(new java.awt.Rectangle(300, 300, 0, 0));
+        setBounds(new java.awt.Rectangle(600, 300, 0, 0));
+        setResizable(false);
 
         jLabel1.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 153, 153));

@@ -15,7 +15,7 @@ public class Worker{
         this.workerId = workerId;
     }
   
-    public void getWorkerId(){
+    public Long getWorkerId(){
         return workerId;
     }
   
@@ -23,7 +23,7 @@ public class Worker{
         this.firstName = firstName;
     }
   
-    public void getfirstName(){
+    public String getfirstName(){
         return firstName;
     }
   
@@ -31,7 +31,7 @@ public class Worker{
         this.lastName = lastName;
     }
   
-    public void getlastName(){
+    public String getlastName(){
         return lastName;
     }
     
@@ -39,7 +39,7 @@ public class Worker{
         this.emailAddress = emailAddress;
     }
   
-    public void getemailAddress(){
+    public String getemailAddress(){
         return emailAddress;
     }
 }

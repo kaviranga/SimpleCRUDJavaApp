@@ -11,30 +11,24 @@ import java.util.ArrayList;
 import java.sql.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
+
 /**
  *
- * @author kaviranga
+ * @author Duminda Gunawardhana
  */
+
 public class Connector {
     
-    public Connector(String firstname,String lastname, String emailaddress){
-        super();
-        this.firstName = firstname;
-        this.lastName = lastname;
-        this.emailAddress = emailaddress;
+    public Connector(){
     }
-
-    /**
-     * @param args the command line arguments
-     */
     
-    static String url = "jdbc:mysql://localhost:3306/simpleDB";
+    static String url = "jdbc:mysql://localhost:5432/simpledb";
     static String username = "root" ;
-    static String password = "";
+    static String password = "secretpass";
     static String jdbc_driver = "com.mysql.jdbc.Driver";
     
     public static void insertData(String firstName,String lastName,String emailAddress) throws SQLException, ClassNotFoundException {
-        String sql = "INSERT INTO workers VALUES('"+firstName+"','"+lastName+"','"+emailAddress+"')";
+        String sql = "INSERT INTO workers(firstname,lastname,emailaddress) VALUES('"+firstName+"','"+lastName+"','"+emailAddress+"')";
         Class.forName(jdbc_driver);
         Connection con = DriverManager.getConnection(url,username,password);
         Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_UPDATABLE);
@@ -92,4 +86,6 @@ public class Connector {
         Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_UPDATABLE);
         stmt.executeUpdate(sql);
     }
+    
+    
 }
