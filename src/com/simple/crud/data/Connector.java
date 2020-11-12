@@ -22,30 +22,30 @@ public class Connector {
     public Connector(){
     }
     
-    static String url = "jdbc:mysql://localhost:5432/simpledb";
-    static String username = "root" ;
-    static String password = "secretpass";
-    static String jdbc_driver = "com.mysql.jdbc.Driver";
+    static String url = "jdbc:postgresql://localhost:5432/simpledb";
+    static String username = "postgres" ;
+    static String password = "root@123";
+    static String jdbc_driver = "org.postgresql.Driver";
     
-    public static void insertData(String firstName,String lastName,String emailAddress) throws SQLException, ClassNotFoundException {
-        String sql = "INSERT INTO workers(firstname,lastname,emailaddress) VALUES('"+firstName+"','"+lastName+"','"+emailAddress+"')";
+    public static void insertData(Integer id,String firstName,String lastName,String emailAddress) throws SQLException, ClassNotFoundException {
+        String sql = "INSERT INTO workers(workerid,firstname,lastname,emailaddress) VALUES('"+id+"','"+firstName+"','"+lastName+"','"+emailAddress+"')";
         Class.forName(jdbc_driver);
         Connection con = DriverManager.getConnection(url,username,password);
         Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_UPDATABLE);
         stmt.executeUpdate(sql);
     }
     
-    public static ArrayList viewData1(String firstName) throws ClassNotFoundException{
+    public static ArrayList viewData1(Integer id) throws ClassNotFoundException{
         ArrayList al1=new ArrayList();
            try{
-            String sql="SELECT lastName FROM workers WHERE firstName='"+firstName+"'";
+            String sql="SELECT firstname FROM workers WHERE workerid='"+id+"'";
             Class.forName(jdbc_driver);
             Connection con = DriverManager.getConnection(url,username,password);
             Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_UPDATABLE);
             ResultSet rs = stmt.executeQuery(sql);
             
                 while(rs.next()){
-                    al1.add(rs.getString("lastName"));
+                    al1.add(rs.getString("firstname"));
                 }
             }catch(SQLException e){
               e.printStackTrace();
@@ -53,39 +53,56 @@ public class Connector {
         return al1;
     }
     
-    public static ArrayList viewData2(String firstName) throws ClassNotFoundException{
+    public static ArrayList viewData2(Integer id) throws ClassNotFoundException{
         ArrayList al2=new ArrayList();
            try{
-                String sql="SELECT emailAddress FROM workers WHERE firstName='"+firstName+"'";
-                Class.forName(jdbc_driver);
-                Connection con = DriverManager.getConnection(url,username,password);
-                Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_UPDATABLE);
-                ResultSet rs = stmt.executeQuery(sql);
+            String sql="SELECT lastname FROM workers WHERE workerid='"+id+"'";
+            Class.forName(jdbc_driver);
+            Connection con = DriverManager.getConnection(url,username,password);
+            Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_UPDATABLE);
+            ResultSet rs = stmt.executeQuery(sql);
             
-                    while(rs.next()){ 
-                        al2.add(rs.getString("emailAddress"));
-                    }
+                while(rs.next()){
+                    al2.add(rs.getString("lastname"));
+                }
             }catch(SQLException e){
               e.printStackTrace();
             }
         return al2;
     }
     
-    public static void editData(String firstName,String lastName,String emailAddress) throws ClassNotFoundException,SQLException,Exception{
-        String sql = "UPDATE workers SET lastName ='"+lastName+"',emailAddress = '"+emailAddress+"' WHERE firstName='"+firstName+"'";
+    public static ArrayList viewData3(Integer id) throws ClassNotFoundException{
+        ArrayList al3=new ArrayList();
+           try{
+                String sql="SELECT emailaddress FROM workers WHERE workerid='"+id+"'";
+                Class.forName(jdbc_driver);
+                Connection con = DriverManager.getConnection(url,username,password);
+                Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_UPDATABLE);
+                ResultSet rs = stmt.executeQuery(sql);
+            
+                    while(rs.next()){ 
+                        al3.add(rs.getString("emailaddress"));
+                    }
+            }catch(SQLException e){
+              e.printStackTrace();
+            }
+        return al3;
+    }
+    
+    public static void editData(Integer id,String firstname,String lastname,String emailaddress) throws ClassNotFoundException,SQLException,Exception{
+        String sql = "UPDATE workers SET firstname='"+firstname+"',lastname ='"+lastname+"',emailaddress = '"+emailaddress+"' WHERE workerid='"+id+"'";
         Class.forName(jdbc_driver);
         Connection con = DriverManager.getConnection(url,username,password);
         Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_UPDATABLE);
         stmt.executeUpdate(sql);
     }
     
-    public static void deleteData(String firstName) throws ClassNotFoundException,SQLException,Exception{
-        String sql ="DELETE FROM workers WHERE firstName ='"+firstName+"'";
+    public static void deleteData(Integer id) throws ClassNotFoundException,SQLException,Exception{
+        String sql ="DELETE FROM workers WHERE workerid ='"+id+"'";
         Class.forName(jdbc_driver);
         Connection con = DriverManager.getConnection(url,username,password);
         Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_UPDATABLE);
         stmt.executeUpdate(sql);
     }
-    
-    
+       
 }
