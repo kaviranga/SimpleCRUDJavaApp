@@ -5,7 +5,6 @@
  */
 package com.simple.crud.data;
 
-import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.sql.*;

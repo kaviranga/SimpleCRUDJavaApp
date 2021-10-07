@@ -6,7 +6,6 @@
 package com.simple.crud.gui;
 
 import com.simple.crud.data.Connector;
-import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -270,7 +269,6 @@ public class SimpleCrudApp extends javax.swing.JFrame {
         }
         
         try{
-            
             ArrayList al2 = Connector.viewData2(id);
             Iterator it2 = al2.iterator();
             
@@ -286,7 +284,6 @@ public class SimpleCrudApp extends javax.swing.JFrame {
         }
         
         try{
-            
             ArrayList al3 = Connector.viewData3(id);
             Iterator it3 = al3.iterator();
             
@@ -294,7 +291,6 @@ public class SimpleCrudApp extends javax.swing.JFrame {
                 String emailaddress = it3.next().toString();
                 emailAddressTextField.setText(emailaddress);
             }
- 
         }catch (ClassNotFoundException ex){
             ex.printStackTrace();
         }catch (Exception ex){
@@ -308,7 +304,6 @@ public class SimpleCrudApp extends javax.swing.JFrame {
         int id = Integer.parseInt(idTextField.getText());
         
         try {
-            
             Connector.deleteData(id);
         } catch (ClassNotFoundException ex) {
             ex.printStackTrace();
